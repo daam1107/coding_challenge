@@ -32,16 +32,18 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'globant',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hired_employees',
-    'departments',
-    'jobs',
+    'dbbackup',
 ]
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR /'backup'}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

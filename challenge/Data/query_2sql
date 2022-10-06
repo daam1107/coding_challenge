@@ -1,0 +1,45 @@
+-- SQLite
+with table_1 as (
+select
+    a2.department,
+    count(a1.id) as count_id
+FROM globant_hired_employees as a1
+     left join globant_departments as a2
+     on a1.department_id = a2.id 
+WHERE 
+   strftime('%Y', datetime) = '2021'
+GROUP BY  
+    a2.department
+
+    ),
+
+mean as (
+select 
+    department,
+    AVG(count_id) as avg_hired
+from table_1
+group by department
+)
+
+
+select 
+    a4.department,
+    count(a3.id) as hired
+FROM globant_hired_employees as a3
+     left join globant_departments as a4
+     on a3.department_id = a4.id 
+     left join mean as a5 
+     on a4.department = a5.department 
+GROUP by
+    a4.department
+HAVING hired > a5.avg_hired
+ORDER BY hired desc
+
+
+
+
+
+    
+    
+
+    

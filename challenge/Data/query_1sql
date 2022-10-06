@@ -1,0 +1,31 @@
+-- SQLite
+SELECT 
+    a2.department as department,
+    a3.job as job,
+    CASE
+        when 0 + strftime('%m', datetime) between  1 and  3 then count(a1.id) else 0
+    end as Q1,
+    CASE
+        when 0 + strftime('%m', datetime) between  4 and  6 then count(a1.id) else 0
+    end as Q2,
+    CASE
+        when 0 + strftime('%m', datetime) between  7 and  9 then count(a1.id) else 0
+    end as Q3,
+    CASE
+        when 0 + strftime('%m', datetime) between  10 and  12 then count(a1.id) else 0
+    end as Q4
+FROM globant_hired_employees as a1
+     left join globant_departments as a2
+     on a1.department_id = a2.id 
+     left join globant_jobs as a3
+     on a1.job_id = a3.id
+WHERE 
+    strftime('%Y', datetime) = '2021'
+GROUP BY 
+    a2.department,
+    a3.job
+
+    
+    
+
+    
